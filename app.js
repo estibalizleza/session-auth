@@ -1,6 +1,5 @@
 const express = require('express');
 const session = require('express-session');
-const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
@@ -21,7 +20,7 @@ mongoose.connect('mongodb://localhost/auth_demo', {
 });
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(session({
     secret: 'your-secret-key',
