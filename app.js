@@ -37,6 +37,10 @@ app.post('/register', async (req, res) => {
             return res.status(400).send('Username already exists');
         }
 
+        //formato correcto de correo
+
+        //repetir contraseña(confirmar que son iguales)
+
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
         
@@ -72,7 +76,7 @@ app.post('/login', async (req, res) => {
         }
 
         // Set session
-        req.session.user = username;
+        req.session.user = username; //cookie -->  username gorde
         res.redirect('/dashboard');
     } catch (error) {
         res.status(500).send('Error logging in');
@@ -81,7 +85,7 @@ app.post('/login', async (req, res) => {
 
 // Dashboard route (protected)
 app.get('/dashboard', (req, res) => {
-    if (!req.session.user) {
+    if (!req.session.user) { //sessio.user balia bat dauka?
         return res.redirect('/');
     }
     res.send(`Welcome ${req.session.user}! You are now logged in.`);
